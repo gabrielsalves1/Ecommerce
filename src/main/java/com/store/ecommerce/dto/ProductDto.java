@@ -15,6 +15,8 @@ public class ProductDto {
 
     private List<Category> categories;
 
+    private String sku;
+
     public ProductDto() {
     }
 
@@ -23,6 +25,7 @@ public class ProductDto {
         this.productName = product.getProductName();
         this.description = product.getDescription();
         this.categories = product.getCategories();
+        this.sku = product.getSku();
     }
 
     public Long getId() {
@@ -39,5 +42,9 @@ public class ProductDto {
 
     public List<Category> getCategories() {
         return categories;
+    }
+
+    public String getSku() {
+        return sku;
     }
 }

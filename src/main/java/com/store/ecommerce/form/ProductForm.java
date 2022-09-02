@@ -15,6 +15,8 @@ public class ProductForm {
 
     private List<Long> categoriesId;
 
+    private String sku;
+
     public String getProductName() {
         return productName;
     }
@@ -39,11 +41,19 @@ public class ProductForm {
         this.categoriesId = categoriesId;
     }
 
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
     public Product convertToProduct(CategoryRepository categoryRepository) {
         List<Category> list = new ArrayList<>();
         categoriesId.stream().forEach(id ->
                 list.add(categoryRepository.findById(id).get())
         );
-        return new Product(productName, description, list);
+        return new Product(productName, description, list, sku);
     }
 }

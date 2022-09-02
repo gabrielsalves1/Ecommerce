@@ -24,13 +24,16 @@ public class Product {
     )
     private List<Category> categories;
 
+    private String sku;
+
     public Product() {
     }
 
-    public Product(String productName, String description, List<Category> categories) {
+    public Product(String productName, String description, List<Category> categories, String sku) {
         this.productName = productName;
         this.description = description;
         this.categories = categories;
+        this.sku = sku;
     }
 
     public Long getId() {
@@ -63,5 +66,13 @@ public class Product {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 }
