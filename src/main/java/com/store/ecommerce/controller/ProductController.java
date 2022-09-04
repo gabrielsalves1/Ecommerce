@@ -1,5 +1,6 @@
 package com.store.ecommerce.controller;
 
+import com.store.ecommerce.dto.ProductDetailsDto;
 import com.store.ecommerce.dto.ProductDto;
 import com.store.ecommerce.form.ProductForm;
 import com.store.ecommerce.service.ProductService;
@@ -26,10 +27,10 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> findById(@PathVariable Long id) {
-        ProductDto productDto = productService.findById(id);
+    public ResponseEntity<ProductDetailsDto> findById(@PathVariable Long id) {
+        ProductDetailsDto productDetailsDto = productService.findById(id);
 
-        return ResponseEntity.ok().body(productDto);
+        return ResponseEntity.ok().body(productDetailsDto);
     }
 
     @PostMapping

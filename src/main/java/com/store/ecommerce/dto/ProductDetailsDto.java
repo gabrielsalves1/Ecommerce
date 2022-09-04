@@ -6,8 +6,7 @@ import com.store.ecommerce.model.Product;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class ProductDto {
-
+public class ProductDetailsDto {
     private Long id;
 
     private String productName;
@@ -19,17 +18,20 @@ public class ProductDto {
     private String sku;
 
     private BigDecimal amount;
+    
+    private Long quantity;
 
-    public ProductDto() {
+    public ProductDetailsDto() {
     }
 
-    public ProductDto(Product product) {
+    public ProductDetailsDto(Product product, Long quantity) {
         this.id = product.getId();
         this.productName = product.getProductName();
         this.description = product.getDescription();
         this.categories = product.getCategories();
         this.sku = product.getSku();
         this.amount = product.getAmount();
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -52,7 +54,7 @@ public class ProductDto {
         return sku;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public Long getQuantity() {
+        return quantity;
     }
 }

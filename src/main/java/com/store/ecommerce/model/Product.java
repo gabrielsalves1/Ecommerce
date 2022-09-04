@@ -3,10 +3,10 @@ package com.store.ecommerce.model;
 import com.store.ecommerce.dto.ProductDto;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
-@Entity
-@Table(name = "product")
+@Entity(name = "tb_product")
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,14 +26,17 @@ public class Product {
 
     private String sku;
 
+    private BigDecimal amount;
+
     public Product() {
     }
 
-    public Product(String productName, String description, List<Category> categories, String sku) {
+    public Product(String productName, String description, List<Category> categories, String sku, BigDecimal amount) {
         this.productName = productName;
         this.description = description;
         this.categories = categories;
         this.sku = sku;
+        this.amount = amount;
     }
 
     public Long getId() {
@@ -74,5 +77,13 @@ public class Product {
 
     public void setSku(String sku) {
         this.sku = sku;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }

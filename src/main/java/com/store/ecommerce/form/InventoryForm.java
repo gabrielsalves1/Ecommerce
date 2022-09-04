@@ -4,9 +4,11 @@ import com.store.ecommerce.model.Inventory;
 import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.InventoryRepository;
 import com.store.ecommerce.repository.ProductRepository;
+import com.sun.istack.NotNull;
 
 public class InventoryForm {
 
+    @NotNull
     private Long productId;
 
     private String productCode;

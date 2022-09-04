@@ -1,9 +1,11 @@
 package com.store.ecommerce.service;
 
+import com.store.ecommerce.dto.ProductDetailsDto;
 import com.store.ecommerce.dto.ProductDto;
 import com.store.ecommerce.form.ProductForm;
 import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.CategoryRepository;
+import com.store.ecommerce.repository.InventoryRepository;
 import com.store.ecommerce.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private InventoryRepository inventoryRepository;
+
     public List<ProductDto> findAll() {
         List<Product> list = productRepository.findAll();
         List<ProductDto> listDto = list.stream().map(ProductDto::new).collect(Collectors.toList());
@@ -29,12 +34,13 @@ public class ProductService {
         return listDto;
     }
 
-    public ProductDto findById(Long id) {
+    public ProductDetailsDto findById(Long id) {
         Optional<Product> optional = productRepository.findById(id);
         Product product = optional.get();
+        Long quantity = inventoryRepository.countByProduct_Id(product.getId());
 
-        ProductDto productDto = new ProductDto(product);
-        return productDto;
+        ProductDetailsDto productDetailsDto = new ProductDetailsDto(product, quantity);
+        return productDetailsDto;
     }
 
     @Transactional
@@ -44,5 +50,4 @@ public class ProductService {
 
         return new ProductDto(product);
     }
-
 }

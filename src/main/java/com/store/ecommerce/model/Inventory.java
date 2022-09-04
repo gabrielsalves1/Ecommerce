@@ -2,7 +2,7 @@ package com.store.ecommerce.model;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "tb_inventory")
 public class Inventory {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,3 +46,4 @@ public class Inventory {
         this.productCode = productCode;
     }
 }
+

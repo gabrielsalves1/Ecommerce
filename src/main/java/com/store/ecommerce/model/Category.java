@@ -3,7 +3,7 @@ package com.store.ecommerce.model;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "tb_category")
 public class Category {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

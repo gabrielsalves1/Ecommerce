@@ -3,19 +3,27 @@ package com.store.ecommerce.form;
 import com.store.ecommerce.model.Category;
 import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.CategoryRepository;
+import com.sun.istack.NotNull;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductForm {
 
+    @NotNull
     private String productName;
 
+    @NotNull
     private String description;
 
     private List<Long> categoriesId;
 
+    @NotNull
     private String sku;
+
+    @NotNull
+    private BigDecimal amount;
 
     public String getProductName() {
         return productName;
@@ -49,11 +57,19 @@ public class ProductForm {
         this.sku = sku;
     }
 
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
     public Product convertToProduct(CategoryRepository categoryRepository) {
         List<Category> list = new ArrayList<>();
         categoriesId.stream().forEach(id ->
                 list.add(categoryRepository.findById(id).get())
         );
-        return new Product(productName, description, list, sku);
+        return new Product(productName, description, list, sku, amount);
     }
 }

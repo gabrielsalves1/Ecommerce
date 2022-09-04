@@ -4,4 +4,5 @@ import com.store.ecommerce.model.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
+    Long countByProduct_Id(Long id);
 }
