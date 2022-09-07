@@ -4,10 +4,12 @@ import com.store.ecommerce.enums.ORDER_STATUS;
 import com.store.ecommerce.model.Order;
 import com.store.ecommerce.model.Product;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OrderDto {
+public class OrderDto implements Serializable {
+    public static final long serialVersionUID = 1L;
 
     private Long id;
 

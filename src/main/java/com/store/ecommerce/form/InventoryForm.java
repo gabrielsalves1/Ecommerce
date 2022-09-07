@@ -6,7 +6,10 @@ import com.store.ecommerce.repository.InventoryRepository;
 import com.store.ecommerce.repository.ProductRepository;
 import com.sun.istack.NotNull;
 
-public class InventoryForm {
+import java.io.Serializable;
+
+public class InventoryForm implements Serializable {
+    public static final long serialVersionUID = 1L;
 
     @NotNull
     private Long productId;

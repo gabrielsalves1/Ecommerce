@@ -5,11 +5,13 @@ import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.CategoryRepository;
 import com.sun.istack.NotNull;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductForm {
+public class ProductForm implements Serializable {
+    public static final long serialVersionUID = 1L;
 
     @NotNull
     private String productName;

@@ -1,12 +1,11 @@
 package com.store.ecommerce.service;
 
 import com.store.ecommerce.dto.InventoryDto;
-import com.store.ecommerce.dto.ProductDto;
 import com.store.ecommerce.form.InventoryForm;
 import com.store.ecommerce.model.Inventory;
-import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.InventoryRepository;
 import com.store.ecommerce.repository.ProductRepository;
+import com.store.ecommerce.service.exceptions.InventoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +23,7 @@ public class InventoryService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Transactional(readOnly = true)
     public List<InventoryDto> findAll() {
         List<Inventory> list = inventoryRepository.findAll();
         List<InventoryDto> listInventoryDto = list.stream().map(InventoryDto::new).collect(Collectors.toList());
@@ -39,9 +39,10 @@ public class InventoryService {
         return new InventoryDto(inventory);
     }
 
+    @Transactional(readOnly = true)
     public InventoryDto findById(Long id) {
         Optional<Inventory> optional = inventoryRepository.findById(id);
-        Inventory inventory = optional.get();
+        Inventory inventory = optional.orElseThrow(() -> new InventoryNotFoundException("Inventory not found"));
 
         return new InventoryDto(inventory);
     }

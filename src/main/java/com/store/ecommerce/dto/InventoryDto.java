@@ -3,7 +3,10 @@ package com.store.ecommerce.dto;
 import com.store.ecommerce.model.Inventory;
 import com.store.ecommerce.model.Product;
 
-public class InventoryDto {
+import java.io.Serializable;
+
+public class InventoryDto implements Serializable {
+    public static final long serialVersionUID = 1L;
 
     private Long id;
 

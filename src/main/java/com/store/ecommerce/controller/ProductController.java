@@ -5,6 +5,11 @@ import com.store.ecommerce.dto.ProductDto;
 import com.store.ecommerce.form.ProductForm;
 import com.store.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,8 +25,9 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public List<ProductDto> findAll() {
-        List<ProductDto> listProductDto = productService.findAll();
+    public Page<ProductDto> findAll(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, page = 0, size = 10) Pageable pageable) {
+
+        Page<ProductDto> listProductDto = productService.findAll(pageable);
 
         return listProductDto;
     }

@@ -2,7 +2,10 @@ package com.store.ecommerce.dto;
 
 import com.store.ecommerce.model.Category;
 
-public class CategoryDto {
+import java.io.Serializable;
+
+public class CategoryDto implements Serializable {
+    public static final long serialVersionUID = 1L;
 
     private Long id;
 

@@ -6,10 +6,12 @@ import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.CategoryRepository;
 import com.store.ecommerce.repository.ProductRepository;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderForm {
+public class OrderForm implements Serializable {
+    public static final long serialVersionUID = 1L;
 
     private List<Long> productsId;
 

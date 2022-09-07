@@ -3,10 +3,13 @@ package com.store.ecommerce.dto;
 import com.store.ecommerce.model.Category;
 import com.store.ecommerce.model.Product;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class ProductDetailsDto {
+public class ProductDetailsDto implements Serializable {
+    public static final long serialVersionUID = 1L;
+
     private Long id;
 
     private String productName;
