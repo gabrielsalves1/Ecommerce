@@ -1,7 +1,5 @@
 package com.store.ecommerce.model;
 
-import com.store.ecommerce.dto.ProductDto;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
