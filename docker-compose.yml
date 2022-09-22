@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   API:
-    image: 'ecommerce-docker.jar'
+    image: 'ecommerce.jar'
     ports:
       - "8080:8080"
     depends_on:

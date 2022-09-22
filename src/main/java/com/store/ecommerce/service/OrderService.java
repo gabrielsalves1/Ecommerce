@@ -1,8 +1,12 @@
 package com.store.ecommerce.service;
 
 import com.store.ecommerce.dto.OrderDto;
+import com.store.ecommerce.enums.ORDER_STATUS;
 import com.store.ecommerce.form.OrderForm;
+import com.store.ecommerce.model.Inventory;
 import com.store.ecommerce.model.Order;
+import com.store.ecommerce.model.Product;
+import com.store.ecommerce.repository.InventoryRepository;
 import com.store.ecommerce.repository.OrderRepository;
 import com.store.ecommerce.repository.ProductRepository;
 import com.store.ecommerce.service.exceptions.OrderNotFoundException;
@@ -10,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,6 +28,9 @@ public class OrderService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private InventoryRepository inventoryRepository;
 
     @Transactional(readOnly = true)
     public List<OrderDto> findAll() {
@@ -41,9 +50,32 @@ public class OrderService {
 
     @Transactional
     public OrderDto insert(OrderForm form) {
-        Order order = form.convertToOrder(productRepository);
+        Order order = form.convertToOrder(productRepository, inventoryRepository);
         order = orderRepository.save(order);
 
         return new OrderDto(order);
+    }
+
+    @Transactional
+    public OrderDto updateOrderStatus(Long id) {
+        try {
+            Order order = orderRepository.getReferenceById(id);
+
+            List<Inventory> listInventory = new ArrayList<>();
+            List<Long> productsId = order.getProducts().stream().map(Product::getId).collect(Collectors.toList());
+
+            productsId.stream().forEach(productId -> {
+                Inventory inventory = inventoryRepository.findInventoryByProductIdWithoutOrderId(productId);
+                listInventory.add(inventory);
+            });
+
+            order.setStatus(ORDER_STATUS.APROVADO);
+            order.setInventories(listInventory);
+            order = orderRepository.save(order);
+
+            return new OrderDto(order);
+        } catch (EntityNotFoundException e) {
+            throw new OrderNotFoundException("Id not found " + id);
+        }
     }
 }

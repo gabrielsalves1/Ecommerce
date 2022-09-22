@@ -14,6 +14,10 @@ public class Inventory {
 
     private String productCode;
 
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
     public Inventory() {
     }
 
@@ -44,6 +48,14 @@ public class Inventory {
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
 

@@ -42,4 +42,11 @@ public class OrderController {
 
         return ResponseEntity.created(uri).body(orderDto);
     }
+
+    @PutMapping("/authorizePayment/{id}")
+    public ResponseEntity<OrderDto> updateOrderStatus(@PathVariable Long id) {
+        OrderDto orderDto = orderService.updateOrderStatus(id);
+
+        return ResponseEntity.ok().body(orderDto);
+    }
 }

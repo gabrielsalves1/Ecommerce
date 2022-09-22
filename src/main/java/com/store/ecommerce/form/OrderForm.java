@@ -1,9 +1,11 @@
 package com.store.ecommerce.form;
 
 import com.store.ecommerce.model.Category;
+import com.store.ecommerce.model.Inventory;
 import com.store.ecommerce.model.Order;
 import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.CategoryRepository;
+import com.store.ecommerce.repository.InventoryRepository;
 import com.store.ecommerce.repository.ProductRepository;
 
 import java.io.Serializable;
@@ -33,11 +35,13 @@ public class OrderForm implements Serializable {
         this.address = address;
     }
 
-    public Order convertToOrder(ProductRepository productRepository) {
+    public Order convertToOrder(ProductRepository productRepository, InventoryRepository inventoryRepository) {
         List<Product> list = new ArrayList<>();
-        productsId.stream().forEach(id ->
-                list.add(productRepository.findById(id).get())
-        );
+
+        productsId.stream().forEach(id -> {
+            list.add(productRepository.findById(id).get());
+        });
+
         return new Order(list, address);
     }
 }

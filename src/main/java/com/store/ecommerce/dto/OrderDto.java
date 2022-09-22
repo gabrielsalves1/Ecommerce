@@ -1,6 +1,7 @@
 package com.store.ecommerce.dto;
 
 import com.store.ecommerce.enums.ORDER_STATUS;
+import com.store.ecommerce.model.Inventory;
 import com.store.ecommerce.model.Order;
 import com.store.ecommerce.model.Product;
 
@@ -21,6 +22,8 @@ public class OrderDto implements Serializable {
 
     private BigDecimal amount;
 
+    private List<Inventory> inventories;
+
     public OrderDto() {
     }
 
@@ -30,6 +33,7 @@ public class OrderDto implements Serializable {
         this.status = order.getStatus();
         this.address = order.getAddress();
         this.amount = order.getAmount();
+        this.inventories = order.getInventories();
     }
 
     public Long getId() {
@@ -50,5 +54,9 @@ public class OrderDto implements Serializable {
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public List<Inventory> getInventories() {
+        return inventories;
     }
 }

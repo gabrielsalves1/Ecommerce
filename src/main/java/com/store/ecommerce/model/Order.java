@@ -27,6 +27,9 @@ public class Order {
 
     private BigDecimal amount;
 
+    @OneToMany
+    private List<Inventory> inventories;
+
     public Order() {
     }
 
@@ -75,5 +78,13 @@ public class Order {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public List<Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(List<Inventory> inventories) {
+        this.inventories = inventories;
     }
 }
