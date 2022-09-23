@@ -1,5 +1,6 @@
 package com.store.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.store.ecommerce.enums.ORDER_STATUS;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Order {
     private BigDecimal amount;
 
     @OneToMany
+    @JsonIgnore
     private List<Inventory> inventories;
 
     public Order() {

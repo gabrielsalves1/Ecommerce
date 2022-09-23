@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     Long countByProduct_Id(Long id);
 
-    @Query(value = "SELECT * FROM tb_inventory WHERE product_id = :id AND order_id IS NULL ORDER BY id ASC", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_inventory WHERE product_id = :id AND order_id IS NULL ORDER BY id ASC LIMIT 1", nativeQuery = true)
     Inventory findInventoryByProductIdWithoutOrderId(@Param("id") Long id);
 }

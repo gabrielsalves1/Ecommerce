@@ -59,15 +59,18 @@ public class OrderService {
     @Transactional
     public OrderDto updateOrderStatus(Long id) {
         try {
-            Order order = orderRepository.getReferenceById(id);
+            Order order = orderRepository.findById(id).get();
 
             List<Inventory> listInventory = new ArrayList<>();
             List<Long> productsId = order.getProducts().stream().map(Product::getId).collect(Collectors.toList());
 
-            productsId.stream().forEach(productId -> {
+            for(Long productId : productsId) {
                 Inventory inventory = inventoryRepository.findInventoryByProductIdWithoutOrderId(productId);
+                inventory.setOrder(order);
+                inventory = inventoryRepository.save(inventory);
+
                 listInventory.add(inventory);
-            });
+            };
 
             order.setStatus(ORDER_STATUS.APROVADO);
             order.setInventories(listInventory);
