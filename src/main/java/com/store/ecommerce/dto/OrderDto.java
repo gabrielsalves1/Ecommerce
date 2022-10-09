@@ -4,6 +4,7 @@ import com.store.ecommerce.enums.ORDER_STATUS;
 import com.store.ecommerce.model.Inventory;
 import com.store.ecommerce.model.Order;
 import com.store.ecommerce.model.Product;
+import com.store.ecommerce.model.User;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ public class OrderDto implements Serializable {
 
     private ORDER_STATUS status;
 
-    private String address;
+    private UserDto user;
 
     private BigDecimal amount;
 
@@ -31,7 +32,7 @@ public class OrderDto implements Serializable {
         this.id = order.getId();
         this.products = order.getProducts();
         this.status = order.getStatus();
-        this.address = order.getAddress();
+        this.user = new UserDto(order.getUser());
         this.amount = order.getAmount();
         this.inventories = order.getInventories();
     }
@@ -48,8 +49,8 @@ public class OrderDto implements Serializable {
         return status;
     }
 
-    public String getAddress() {
-        return address;
+    public UserDto getUser() {
+        return user;
     }
 
     public BigDecimal getAmount() {

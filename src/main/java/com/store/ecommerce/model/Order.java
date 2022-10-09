@@ -24,7 +24,8 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private ORDER_STATUS status = ORDER_STATUS.PROCESSAMENTO;
 
-    private String address;
+    @OneToOne
+    private User user;
 
     private BigDecimal amount;
 
@@ -35,9 +36,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(List<Product> products, String address) {
+    public Order(List<Product> products, User user) {
         this.products = products;
-        this.address = address;
+        this.user = user;
 
         this.amount = products.stream().map(Product::getAmount).reduce(BigDecimal::add).get();
     }
@@ -66,12 +67,12 @@ public class Order {
         this.status = status;
     }
 
-    public String getAddress() {
-        return address;
+    public User getUser() {
+        return user;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public BigDecimal getAmount() {

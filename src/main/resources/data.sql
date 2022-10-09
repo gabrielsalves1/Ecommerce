@@ -1,1 +1,2 @@
-INSERT INTO tb_user(name, email, password) VALUES('Gabriel', 'gabrielsalves2k18@gmail.com', '$2a$10$Sb6Z6fVnLKK7RP/zZaKhMe/Wxyzbd/yWFxT8VEsW5uh9h0iTTyz2q');
+INSERT INTO tb_user(name, email, password, address, address_number) VALUES('Gabriel', 'gabrielsalves2k18@gmail.com', '$2a$10$Sb6Z6fVnLKK7RP/zZaKhMe/Wxyzbd/yWFxT8VEsW5uh9h0iTTyz2q', 'Rua do Teste', '1');
+INSERT INTO tb_category(name) VALUES ('Jogos');

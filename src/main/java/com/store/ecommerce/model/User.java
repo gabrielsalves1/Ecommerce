@@ -20,16 +20,22 @@ public class User implements UserDetails {
 
     private String password;
 
+    private String address;
+
+    private String addressNumber;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Profile> profiles = new ArrayList<>();
 
     private User() {
     }
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String password, String address, String addressNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.address = address;
+        this.addressNumber = addressNumber;
     }
 
     public Long getId() {
@@ -54,6 +60,22 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddressNumber() {
+        return addressNumber;
+    }
+
+    public void setAddressNumber(String addressNumber) {
+        this.addressNumber = addressNumber;
     }
 
     @Override

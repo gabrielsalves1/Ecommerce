@@ -9,6 +9,7 @@ import com.store.ecommerce.model.Product;
 import com.store.ecommerce.repository.InventoryRepository;
 import com.store.ecommerce.repository.OrderRepository;
 import com.store.ecommerce.repository.ProductRepository;
+import com.store.ecommerce.repository.UserRepository;
 import com.store.ecommerce.service.exceptions.OrderNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,9 @@ public class OrderService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Transactional(readOnly = true)
     public List<OrderDto> findAll() {
         List<Order> list = orderRepository.findAll();
@@ -50,7 +54,7 @@ public class OrderService {
 
     @Transactional
     public OrderDto insert(OrderForm form) {
-        Order order = form.convertToOrder(productRepository, inventoryRepository);
+        Order order = form.convertToOrder(productRepository, inventoryRepository, userRepository);
         order = orderRepository.save(order);
 
         return new OrderDto(order);
